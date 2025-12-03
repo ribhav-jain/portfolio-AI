@@ -2,6 +2,7 @@ import React from 'react';
 import { PROFILE } from '../constants';
 import { Brain, Server, ShieldCheck, Code, Zap, Globe, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { VisualBrain, VisualPipeline, VisualShield } from './ProjectVisuals';
 
 const About: React.FC = () => {
   return (
@@ -43,7 +44,7 @@ const About: React.FC = () => {
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-2 text-sm font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/5 hover:bg-white/10 transition-colors cursor-default">
                 <Globe className="w-4 h-4 text-accent" />
-                <span>{PROFILE.location}</span>
+                <span>Based in {PROFILE.location}</span>
               </div>
               <div className="flex items-center gap-2 text-sm font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/5 hover:bg-white/10 transition-colors cursor-default">
                 <Cpu className="w-4 h-4 text-highlight" />
@@ -63,14 +64,15 @@ const About: React.FC = () => {
             viewport={{ once: true }}
             className="md:col-span-2 row-span-1 glass-card p-8 rounded-3xl relative overflow-hidden group hover:bg-white/5 transition-all duration-500 border-white/5 hover:border-accent/20"
           >
-            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
-              <Brain className="w-48 h-48 text-accent rotate-12" />
+            {/* Visual Background */}
+            <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-40 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none">
+              <VisualBrain />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-transparent z-10" />
 
-            <div className="relative z-10 h-full flex flex-col justify-between">
+            <div className="relative z-20 h-full flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-6 border border-accent/20 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-6 border border-accent/20 group-hover:scale-110 transition-transform duration-300 backdrop-blur-md">
                   <Zap className="w-6 h-6 text-accent" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">AI & Machine Learning</h3>
@@ -89,15 +91,21 @@ const About: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="glass-card p-8 rounded-3xl relative overflow-hidden group hover:bg-white/5 transition-all duration-500 border-white/5 hover:border-highlight/20 flex flex-col justify-between"
           >
-            <div className="absolute -right-8 -top-8 w-32 h-32 bg-highlight/10 blur-[40px] rounded-full group-hover:bg-highlight/20 transition-colors" />
-            <div className="w-12 h-12 bg-highlight/10 rounded-xl flex items-center justify-center mb-6 border border-highlight/20 group-hover:scale-110 transition-transform duration-300">
-              <Server className="w-6 h-6 text-highlight" />
+            {/* Visual Background */}
+            <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none">
+              <VisualPipeline />
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-white mb-2">Backend Architecture</h3>
-              <p className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300">
-                Building scalable microservices with <strong>Spring Boot</strong> & <strong>Django</strong>. Expert in high-volume ETL pipelines.
-              </p>
+
+            <div className="relative z-10">
+              <div className="w-12 h-12 bg-highlight/10 rounded-xl flex items-center justify-center mb-6 border border-highlight/20 group-hover:scale-110 transition-transform duration-300 backdrop-blur-md">
+                <Server className="w-6 h-6 text-highlight" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">Backend Architecture</h3>
+                <p className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300">
+                  Building scalable microservices with <strong>Spring Boot</strong> & <strong>Django</strong>. Expert in high-volume ETL pipelines.
+                </p>
+              </div>
             </div>
           </motion.div>
 
@@ -109,15 +117,21 @@ const About: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="glass-card p-8 rounded-3xl relative overflow-hidden group hover:bg-white/5 transition-all duration-500 border-white/5 hover:border-emerald-500/20 flex flex-col justify-between"
           >
-            <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-emerald-500/10 blur-[40px] rounded-full group-hover:bg-emerald-500/20 transition-colors" />
-            <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6 border border-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
-              <ShieldCheck className="w-6 h-6 text-emerald-400" />
+            {/* Visual Background */}
+            <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none">
+              <VisualShield />
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-white mb-2">IAM & Security</h3>
-              <p className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300">
-                Securing enterprise identities with <strong>OAuth2</strong>, <strong>SAML</strong>, & <strong>OIDC</strong>. Building threat detection intelligence.
-              </p>
+
+            <div className="relative z-10">
+              <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6 border border-emerald-500/20 group-hover:scale-110 transition-transform duration-300 backdrop-blur-md">
+                <ShieldCheck className="w-6 h-6 text-emerald-400" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">IAM & Security</h3>
+                <p className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300">
+                  Securing enterprise identities with <strong>OAuth2</strong>, <strong>SAML</strong>, & <strong>OIDC</strong>. Building threat detection intelligence.
+                </p>
+              </div>
             </div>
           </motion.div>
 
@@ -185,7 +199,7 @@ const About: React.FC = () => {
                   </div>
                   <div className="flex">
                     <span className="w-6 text-slate-600 select-none">8</span>
-                    <span className="ml-8 text-purple-400">return</span> <span className="text-blue-400">&nbsp;await</span> <span className="text-slate-300">&nbsp;this</span><span className="text-white">.</span><span className="text-blue-300">scale</span><span className="text-white">();</span>
+                    <span className="ml-8 text-purple-400">return</span> <span className="text-blue-400">await</span> <span className="text-slate-300">this</span><span className="text-white">.</span><span className="text-blue-300">scale</span><span className="text-white">();</span>
                   </div>
                   <div className="flex">
                     <span className="w-6 text-slate-600 select-none">9</span>
