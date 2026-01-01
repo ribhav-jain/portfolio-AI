@@ -10,18 +10,18 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 bg-grid-white opacity-[0.1]" />
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] -z-10 animate-blob mix-blend-screen" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-highlight/5 rounded-full blur-[100px] -z-10 animate-blob animation-delay-2000 mix-blend-screen" />
-
+      
       <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
-
+        
         {/* TEXT COLUMN (Left) */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="order-1 text-left"
         >
           {/* Status Badge - Dynamic Accent Color */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-sm mb-8 hover:bg-accent/10 transition-colors cursor-default">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-sm mb-6 hover:bg-accent/10 transition-colors cursor-default">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
@@ -29,20 +29,26 @@ const Hero: React.FC = () => {
             <span className="text-accent text-xs font-mono font-medium tracking-wider uppercase">Open to Opportunities</span>
           </div>
 
+          {/* Name Introduction - ADDED */}
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+            Hello, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-highlight">{PROFILE.name}</span>
+            <span className="text-accent animate-pulse">_</span>
+          </h2>
+          
           <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] mb-8 tracking-tight text-white">
             Building the <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+            <span className="text-slate-300">
               Future of Logic
             </span>
           </h1>
-
+          
           <p className="text-slate-400 text-lg lg:text-xl mb-10 max-w-xl leading-relaxed font-light">
             {PROFILE.shortBio}
           </p>
-
+          
           <div className="flex flex-wrap gap-4 mb-12">
-            <a
-              href="#projects"
+            <a 
+              href="#projects" 
               className="group relative px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-slate-200 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             >
               View Featured Work
@@ -60,13 +66,13 @@ const Hero: React.FC = () => {
                 { icon: <Github className="w-5 h-5" />, href: PROFILE.socials.github },
                 { icon: <Linkedin className="w-5 h-5" />, href: PROFILE.socials.linkedin },
                 { icon: <Code className="w-5 h-5" />, href: PROFILE.socials.hackerrank, label: "HackerRank" },
-                // { icon: <Database className="w-5 h-5" />, href: PROFILE.socials.kaggle, label: "Kaggle" }
+                { icon: <Database className="w-5 h-5" />, href: PROFILE.socials.kaggle, label: "Kaggle" }
               ].map((social, i) => (
-                <a
+                <a 
                   key={i}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
+                  href={social.href} 
+                  target="_blank" 
+                  rel="noreferrer" 
                   title={social.label}
                   className="text-slate-500 hover:text-white transition-colors hover:scale-110 transform duration-200"
                 >
@@ -78,14 +84,14 @@ const Hero: React.FC = () => {
         </motion.div>
 
         {/* IMAGE COLUMN (Right) */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
           className="order-2 flex justify-center lg:justify-end relative perspective-1000"
         >
-          {/* Abstract Glow Behind */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent rounded-full blur-[80px] opacity-40 animate-pulse" />
+           {/* Abstract Glow Behind */}
+           <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent rounded-full blur-[80px] opacity-40 animate-pulse" />
 
           <div className="relative group w-full max-w-md mx-auto lg:mx-0">
             {/* Tech Frame Decoration */}
