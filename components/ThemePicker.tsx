@@ -3,74 +3,30 @@ import { Palette, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const THEMES = [
-  {
-    name: "Indigo",
-    colors: {
-      accent: "99 102 241",
-      accentHover: "79 70 229",
-      highlight: "56 189 248",
-    },
-    class: "bg-indigo-500",
-  },
-  {
-    name: "Emerald",
-    colors: {
-      accent: "16 185 129",
-      accentHover: "5 150 105",
-      highlight: "132 204 22",
-    },
-    class: "bg-emerald-500",
-  },
-  {
-    name: "Rose",
-    colors: {
-      accent: "244 63 94",
-      accentHover: "225 29 72",
-      highlight: "251 191 36",
-    },
-    class: "bg-rose-500",
-  },
-  {
-    name: "Violet",
-    colors: {
-      accent: "139 92 246",
-      accentHover: "124 58 237",
-      highlight: "232 121 249",
-    },
-    class: "bg-violet-500",
-  },
-  {
-    name: "Amber",
-    colors: {
-      accent: "245 158 11",
-      accentHover: "217 119 6",
-      highlight: "239 68 68",
-    },
-    class: "bg-amber-500",
-  },
+  { name: "Iris", accent: "108 99 255", hover: "79 70 229", highlight: "45 212 191", swatch: "#6c63ff" },
+  { name: "Emerald", accent: "16 185 129", hover: "5 150 105", highlight: "132 204 22", swatch: "#10b981" },
+  { name: "Cyan", accent: "34 211 238", hover: "6 182 212", highlight: "129 140 248", swatch: "#22d3ee" },
+  { name: "Rose", accent: "244 63 94", hover: "225 29 72", highlight: "251 191 36", swatch: "#f43f5e" },
+  { name: "Amber", accent: "245 158 11", hover: "217 119 6", highlight: "56 189 248", swatch: "#f59e0b" },
 ];
+
+type Theme = (typeof THEMES)[number];
 
 const ThemePicker: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTheme, setActiveTheme] = useState("Indigo");
+  const [activeTheme, setActiveTheme] = useState("Iris");
 
-  // Load saved theme on mount
   useEffect(() => {
     const saved = localStorage.getItem("theme-preference");
-    if (saved) {
-      const theme = THEMES.find((t) => t.name === saved);
-      if (theme) {
-        setTheme(theme);
-      }
-    }
+    const theme = THEMES.find((t) => t.name === saved);
+    if (theme) applyTheme(theme);
   }, []);
 
-  const setTheme = (theme: (typeof THEMES)[0]) => {
+  const applyTheme = (theme: Theme) => {
     const root = document.documentElement;
-    root.style.setProperty("--accent", theme.colors.accent);
-    root.style.setProperty("--accent-hover", theme.colors.accentHover);
-    root.style.setProperty("--highlight", theme.colors.highlight);
-
+    root.style.setProperty("--accent", theme.accent);
+    root.style.setProperty("--accent-hover", theme.hover);
+    root.style.setProperty("--highlight", theme.highlight);
     setActiveTheme(theme.name);
     localStorage.setItem("theme-preference", theme.name);
   };
@@ -78,15 +34,15 @@ const ThemePicker: React.FC = () => {
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`p-2 rounded-full transition-all duration-300 ${
+        onClick={() => setIsOpen((v) => !v)}
+        className={`rounded-full p-2 transition-all duration-300 ${
           isOpen
-            ? "bg-white text-primary rotate-45"
-            : "text-slate-400 hover:text-white hover:bg-white/10"
+            ? "rotate-45 bg-ink text-base"
+            : "text-muted hover:bg-white/5 hover:text-ink"
         }`}
-        aria-label="Change Theme"
+        aria-label="Change accent color"
       >
-        <Palette className="w-5 h-5" />
+        <Palette className="h-5 w-5" />
       </button>
 
       <AnimatePresence>
@@ -95,27 +51,23 @@ const ThemePicker: React.FC = () => {
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute top-12 right-0 p-3 bg-secondary/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl flex flex-col gap-3 min-w-[140px] z-50"
+            transition={{ duration: 0.2 }}
+            className="glass absolute right-0 top-12 z-50 flex min-w-[150px] flex-col gap-3 rounded-2xl p-3.5 shadow-2xl"
           >
-            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider ml-1">
-              Theme
-            </span>
-            <div className="grid grid-cols-5 gap-2">
+            <span className="kicker ml-1 text-faint">Accent</span>
+            <div className="flex gap-2.5">
               {THEMES.map((theme) => (
                 <button
                   key={theme.name}
-                  onClick={() => setTheme(theme)}
-                  className={`w-6 h-6 rounded-full ${
-                    theme.class
-                  } flex items-center justify-center transition-transform hover:scale-110 ring-2 ring-offset-2 ring-offset-secondary ${
-                    activeTheme === theme.name
-                      ? "ring-white"
-                      : "ring-transparent"
+                  onClick={() => applyTheme(theme)}
+                  style={{ backgroundColor: theme.swatch }}
+                  className={`flex h-6 w-6 items-center justify-center rounded-full ring-2 ring-offset-2 ring-offset-surface transition-transform hover:scale-110 ${
+                    activeTheme === theme.name ? "ring-white" : "ring-transparent"
                   }`}
                   title={theme.name}
                 >
                   {activeTheme === theme.name && (
-                    <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                    <Check className="h-3 w-3 text-white" strokeWidth={3} />
                   )}
                 </button>
               ))}

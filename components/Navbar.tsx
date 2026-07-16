@@ -3,195 +3,156 @@ import { Menu, X, Terminal } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemePicker from "./ThemePicker";
 
+const NAV_LINKS = [
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
+  { name: "Work", href: "#projects" },
+];
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [active, setActive] = useState("");
 
-  const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-  ];
-
-  // Handle Scroll Spy and Navbar appearance
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      const sections = navLinks.map((link) => link.href.substring(1));
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
       let current = "";
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          // Check if section is visible (top is within middle of screen or active)
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= 100) {
-            current = section;
+      for (const { href } of NAV_LINKS) {
+        const el = document.getElementById(href.slice(1));
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= window.innerHeight / 2 && rect.bottom >= 120) {
+            current = href.slice(1);
           }
         }
       }
-      setActiveSection(current);
+      setActive(current);
     };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex justify-center ${
-          scrolled ? "pt-4" : "pt-6"
+        className={`fixed inset-x-0 top-0 z-50 flex justify-center transition-all duration-500 ${
+          scrolled ? "pt-3" : "pt-5"
         }`}
       >
         <div
-          className={`
-          relative flex items-center justify-between px-6 
-          transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
-          ${
+          className={`relative flex items-center justify-between px-5 transition-all duration-500 ease-out-expo ${
             scrolled
-              ? "w-[92%] md:w-[700px] h-14 rounded-full bg-secondary/80 backdrop-blur-md border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
-              : "w-full max-w-7xl h-20 bg-transparent border-transparent"
-          }
-        `}
+              ? "glass-nav h-14 w-[94%] rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.35)] md:w-[720px]"
+              : "h-18 w-full max-w-7xl border border-transparent bg-transparent py-2"
+          }`}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <a href="#" className="group flex items-center gap-2.5">
             <div
-              className={`p-1.5 rounded-lg transition-colors ${
-                scrolled ? "bg-accent/10" : "bg-white/5 group-hover:bg-white/10"
+              className={`rounded-lg p-1.5 transition-colors ${
+                scrolled ? "bg-accent/12 text-accent" : "bg-white/5 text-ink group-hover:bg-white/10"
               }`}
             >
-              <Terminal
-                className={`w-5 h-5 ${
-                  scrolled ? "text-accent" : "text-slate-200"
-                }`}
-              />
+              <Terminal className="h-5 w-5" />
             </div>
-            <span
-              className={`font-mono font-bold tracking-tight ${
-                scrolled ? "text-lg text-white" : "text-xl text-white"
-              }`}
-            >
+            <span className="font-mono text-lg font-bold tracking-tight text-ink">
               RJ<span className="text-accent">.</span>
             </span>
           </a>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
+          {/* Desktop links */}
+          <div className="hidden items-center gap-1 md:flex">
+            {NAV_LINKS.map((link) => {
+              const isActive = active === link.href.slice(1);
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`
-                    px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 relative
-                    ${
-                      isActive
-                        ? "text-white bg-white/10"
-                        : scrolled
-                        ? "text-slate-400 hover:text-white hover:bg-white/5"
-                        : "text-slate-300 hover:text-white hover:bg-white/5"
-                    }
-                  `}
+                  className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                    isActive ? "text-ink" : "text-muted hover:text-ink"
+                  }`}
                 >
-                  {link.name}
-                  {isActive && !scrolled && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute inset-0 bg-white/10 rounded-full -z-10"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 -z-10 rounded-full bg-white/8"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
+                  {link.name}
                 </a>
               );
             })}
           </div>
 
-          {/* CTA & Mobile Toggle */}
+          {/* Right cluster */}
           <div className="flex items-center gap-2 md:gap-3">
-            {/* Theme Picker */}
             <div className="hidden md:block">
               <ThemePicker />
             </div>
-
             <a
               href="#contact"
-              className={`
-                hidden md:flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold tracking-wide uppercase transition-all
-                ${
-                  scrolled
-                    ? "bg-white text-black hover:bg-slate-200 shadow-lg shadow-white/10"
-                    : "bg-white/10 text-white backdrop-blur-md border border-white/10 hover:bg-white/20"
-                }
-              `}
+              className={`hidden items-center gap-2 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all md:flex ${
+                scrolled
+                  ? "bg-ink text-base shadow-lg shadow-white/5 hover:bg-white"
+                  : "border border-white/10 bg-white/5 text-ink backdrop-blur-md hover:bg-white/10"
+              }`}
             >
               Contact
             </a>
-
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-1 md:hidden">
               <ThemePicker />
               <button
-                className="p-2 text-slate-300 hover:text-white"
-                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 text-muted hover:text-ink"
+                onClick={() => setIsOpen((v) => !v)}
+                aria-label="Toggle menu"
               >
-                {isOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
+                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-primary/95 backdrop-blur-xl md:hidden pt-28 px-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-base/95 px-8 pt-28 backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col space-y-6">
-              {navLinks.map((link) => (
-                <a
+            <div className="flex flex-col">
+              {NAV_LINKS.map((link, i) => (
+                <motion.a
                   key={link.name}
                   href={link.href}
-                  className="text-4xl font-light text-slate-300 hover:text-white border-b border-white/5 pb-6 transition-colors"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.06 }}
                   onClick={() => setIsOpen(false)}
+                  className="border-b border-line/60 py-6 font-display text-4xl font-light text-muted transition-colors hover:text-ink"
                 >
                   {link.name}
-                </a>
+                </motion.a>
               ))}
               <a
                 href="#contact"
-                className="text-4xl font-semibold text-accent mt-4"
                 onClick={() => setIsOpen(false)}
+                className="mt-8 font-display text-4xl font-semibold text-accent"
               >
-                Let's Talk.
+                Let's talk.
               </a>
             </div>
           </motion.div>

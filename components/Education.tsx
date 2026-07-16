@@ -1,45 +1,46 @@
-import React from 'react';
-import { EDUCATION, CERTIFICATIONS } from '../constants';
-import { GraduationCap, Award, CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { EDUCATION, CERTIFICATIONS } from "../constants";
+import { GraduationCap, Award, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Education: React.FC = () => {
   return (
-    <section id="education" className="py-32 relative bg-primary">
-      {/* Background Decor */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.05),transparent_40%)]" />
+    <section id="education" className="relative bg-base py-28">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgb(var(--accent)/0.06),transparent_45%)]" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
-
-          {/* Education Column */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="grid gap-16 md:grid-cols-2 lg:gap-24">
+          {/* Education */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-3 rounded-xl bg-accent/10 text-accent">
-                <GraduationCap className="w-6 h-6" />
+            <div className="mb-8 flex items-center gap-3">
+              <div className="rounded-xl bg-accent/10 p-3 text-accent">
+                <GraduationCap className="h-6 w-6" />
               </div>
-              <h2 className="text-3xl font-bold text-white">Education</h2>
+              <h2 className="font-display text-3xl font-bold text-ink">Education</h2>
             </div>
 
             <div className="space-y-8">
-              {EDUCATION.map((edu, index) => (
-                <div key={index} className="relative pl-8 border-l border-white/10">
-                  <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-accent ring-4 ring-primary" />
-                  <h3 className="text-xl font-bold text-white mb-1">{edu.degree}</h3>
-                  <p className="text-lg text-accent mb-2">{edu.school}</p>
-                  <p className="text-sm font-mono text-slate-500 mb-4">{edu.period}</p>
-                  <p className="text-slate-400 leading-relaxed max-w-md mb-4">
-                    {edu.details}
-                  </p>
+              {EDUCATION.map((edu, i) => (
+                <div key={i} className="relative border-l border-line pl-8">
+                  <span className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-accent ring-4 ring-base" />
+                  <h3 className="font-display text-xl font-bold text-ink">
+                    {edu.degree}
+                  </h3>
+                  <p className="text-accent">{edu.school}</p>
+                  <p className="mb-4 mt-1 font-mono text-sm text-faint">{edu.period}</p>
+                  <p className="max-w-md leading-relaxed text-muted">{edu.details}</p>
                   {edu.coursework && (
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {edu.coursework.map((course, i) => (
-                        <span key={i} className="text-xs px-2 py-1 bg-white/5 border border-white/5 rounded text-slate-400">
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {edu.coursework.map((course, j) => (
+                        <span
+                          key={j}
+                          className="rounded border border-white/5 bg-white/5 px-2 py-1 font-mono text-xs text-muted"
+                        >
                           {course}
                         </span>
                       ))}
@@ -50,42 +51,37 @@ const Education: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Certifications Column */}
+          {/* Certifications */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-3 rounded-xl bg-highlight/10 text-highlight">
-                <Award className="w-6 h-6" />
+            <div className="mb-8 flex items-center gap-3">
+              <div className="rounded-xl bg-highlight/10 p-3 text-highlight">
+                <Award className="h-6 w-6" />
               </div>
-              <h2 className="text-3xl font-bold text-white">Certifications</h2>
+              <h2 className="font-display text-3xl font-bold text-ink">
+                Certifications
+              </h2>
             </div>
 
-            <div className="grid sm:grid-cols-1 gap-4">
-              {CERTIFICATIONS.map((cert, index) => (
+            <div className="grid gap-3">
+              {CERTIFICATIONS.map((cert, i) => (
                 <div
-                  key={index}
-                  className="group flex items-center gap-4 p-4 rounded-xl bg-secondary/30 border border-white/5 hover:bg-white/5 hover:border-white/10 transition-all duration-300"
+                  key={i}
+                  className="group flex items-center gap-4 rounded-xl border border-line/60 bg-surface/40 p-4 transition-colors hover:border-white/10 hover:bg-white/[0.04]"
                 >
-                  <div className="flex-shrink-0 text-emerald-500/50 group-hover:text-emerald-400 transition-colors">
-                    <CheckCircle2 className="w-5 h-5" />
-                  </div>
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-500/60 transition-colors group-hover:text-emerald-400" />
                   <div>
-                    <h4 className="font-semibold text-slate-200 group-hover:text-white transition-colors">
-                      {cert.name}
-                    </h4>
-                    <p className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors mt-0.5">
-                      {cert.issuer}
-                    </p>
+                    <h4 className="font-semibold text-ink">{cert.name}</h4>
+                    <p className="mt-0.5 text-xs text-faint">{cert.issuer}</p>
                   </div>
                 </div>
               ))}
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>

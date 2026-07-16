@@ -1,62 +1,85 @@
-import React from 'react';
-import { Mail, Github, Linkedin, Code, Database, ArrowUpRight } from 'lucide-react';
-import { PROFILE } from '../constants';
+import React from "react";
+import { Mail, Code2, Database } from "lucide-react";
+import { Github, Linkedin } from "./BrandIcons";
+import { PROFILE } from "../constants";
+import { motion } from "framer-motion";
+
+const SOCIALS = [
+  { label: "GitHub", href: PROFILE.socials.github, icon: Github },
+  { label: "LinkedIn", href: PROFILE.socials.linkedin, icon: Linkedin },
+  { label: "HackerRank", href: PROFILE.socials.hackerrank, icon: Code2 },
+  { label: "Kaggle", href: PROFILE.socials.kaggle, icon: Database },
+];
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-32 bg-primary border-t border-white/5 relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-accent/5 blur-[150px] pointer-events-none" />
+    <section
+      id="contact"
+      className="relative overflow-hidden border-t border-line/60 bg-base py-28"
+    >
+      <div className="pointer-events-none absolute left-1/2 top-0 h-full w-full max-w-4xl -translate-x-1/2 bg-accent/5 blur-[150px]" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 mb-24">
-          <div>
-            <h2 className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 text-white">
-              Let's build <br />
-              <span className="text-slate-700">something</span> <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-highlight">intelligent.</span>
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="mb-24 grid gap-16 md:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="kicker">Contact</span>
+            <h2 className="mt-4 font-display text-5xl font-bold tracking-tight text-ink md:text-7xl">
+              Let&apos;s build
+              <br />
+              <span className="text-faint">something</span>
+              <br />
+              <span className="text-gradient-accent">intelligent.</span>
             </h2>
             <a
               href={`mailto:${PROFILE.email}`}
-              className="inline-flex items-center gap-3 text-2xl md:text-3xl font-medium text-white hover:text-accent transition-colors border-b border-white/20 pb-1 hover:border-accent"
+              className="mt-8 inline-flex items-center gap-3 border-b border-white/20 pb-1 text-xl font-medium text-ink transition-colors hover:border-accent hover:text-accent md:text-2xl"
             >
-              <Mail className="w-6 h-6 md:w-8 md:h-8" />
+              <Mail className="h-6 w-6" />
               {PROFILE.email}
             </a>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col justify-end">
-            <p className="text-xl text-slate-400 mb-10 max-w-md font-light">
-              Whether you need to scale your AI infrastructure, integrate complex LLMs, or secure your enterprise IAM, I'm ready to help.
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="flex flex-col justify-end"
+          >
+            <p className="mb-9 max-w-md text-lg font-light leading-relaxed text-muted">
+              Whether you need to scale AI infrastructure, integrate complex LLMs,
+              or secure your enterprise identity stack — I&apos;d love to help.
             </p>
-            <div className="flex flex-wrap gap-4">
-              {[
-                { label: "Github", href: PROFILE.socials.github, icon: Github },
-                { label: "LinkedIn", href: PROFILE.socials.linkedin, icon: Linkedin },
-                { label: "HackerRank", href: PROFILE.socials.hackerrank, icon: Code },
-                { label: "Kaggle", href: PROFILE.socials.kaggle, icon: Database },
-              ].map((social) => (
+            <div className="flex flex-wrap gap-3">
+              {SOCIALS.map(({ label, href, icon: Icon }) => (
                 <a
-                  key={social.label}
-                  href={social.href}
+                  key={label}
+                  href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 px-8 py-4 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-white group"
+                  className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-ink transition-colors hover:bg-white/10"
                 >
-                  <social.icon className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
-                  {social.label}
+                  <Icon className="h-5 w-5 text-muted transition-colors group-hover:text-ink" />
+                  {label}
                 </a>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-slate-500 text-sm font-mono">
-          <p>&copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.</p>
-          <div className="flex gap-8 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Sitemap</a>
-          </div>
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-line/60 pt-8 font-mono text-sm text-faint md:flex-row">
+          <p>
+            &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
+          </p>
+          {/* <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            Available for opportunities
+          </div> */}
         </div>
       </div>
     </section>
