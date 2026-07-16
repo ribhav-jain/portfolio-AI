@@ -27,7 +27,7 @@ const Experience: React.FC = () => {
 
         <div className="relative">
           {/* rail */}
-          <div className="absolute left-0 top-2 h-full w-px bg-gradient-to-b from-accent/60 via-line to-transparent md:left-40" />
+          <div className="absolute left-0 top-2 h-full w-px bg-gradient-to-b from-accent/60 via-line to-transparent lg:left-52" />
 
           <div className="space-y-10">
             {EXPERIENCES.map((exp, idx) => (
@@ -37,20 +37,20 @@ const Experience: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
-                className="group relative grid grid-cols-1 gap-x-8 pl-8 md:grid-cols-[10rem_1fr] md:pl-0"
+                className="group relative grid grid-cols-1 gap-x-8 pl-8 lg:grid-cols-[13rem_1fr] lg:pl-0"
               >
                 {/* period */}
-                <div className="mb-1 md:pt-1 md:text-right">
+                <div className="mb-1 lg:pr-8 lg:pt-1 lg:text-right">
                   <span className="font-mono text-sm text-faint transition-colors group-hover:text-accent">
                     {exp.period}
                   </span>
                 </div>
 
                 {/* node */}
-                <span className="absolute left-[-5px] top-2 h-2.5 w-2.5 rounded-full bg-accent ring-4 ring-base transition-transform group-hover:scale-125 md:left-[9.65rem]" />
+                <span className="absolute left-[-5px] top-2 h-2.5 w-2.5 rounded-full bg-accent ring-4 ring-base transition-transform group-hover:scale-125 lg:left-[12.7rem]" />
 
                 {/* card */}
-                <div className="rounded-2xl border border-transparent p-1 transition-colors md:group-hover:border-line/60 md:group-hover:bg-white/[0.02] md:p-5">
+                <div className="rounded-2xl border border-transparent p-1 transition-colors lg:p-5 lg:group-hover:border-line/60 lg:group-hover:bg-white/[0.02]">
                   <h3 className="font-display text-xl font-bold text-ink transition-colors group-hover:text-accent">
                     {exp.role}
                   </h3>
