@@ -4,68 +4,113 @@ import {
   SkillCategory,
   Education,
   Certification,
+  Metric,
 } from "./types";
 
 export const PROFILE = {
   name: "Ribhav Jain",
-  role: "Software Developer & Data Scientist",
+  role: "Lead AI Engineer",
+  tagline: "Building the future of logic.",
   shortBio:
-    "Building AI-driven applications, scalable architectures, and intelligent IAM systems.",
+    "Lead AI Engineer and full-stack developer — I build agentic AI, scalable backends, and the secure identity platforms they run on.",
   about:
-    "I am a Senior Software Developer & Data Scientist with 5+ years of experience. My expertise lies in the 'missing middle' of AI development—scaling experimental models into production-grade applications. I specialize in building robust AI-driven applications, scalable backend architectures (Django, Spring), and full-stack systems with secure IAM integrations (OAuth2, SAML, OIDC).",
+    "I'm a Senior AI Engineer with 6+ years spanning AI, full-stack development, and data science. I specialize in the 'missing middle' of AI — turning experimental models into production systems — while building scalable backends (FastAPI, Django, Spring) and secure identity platforms (SAML, OIDC, OAuth). Most recently I architected a production agentic AI platform on multi-agent LangGraph orchestration and governed MCP tooling, and lead the team that delivers it.",
   location: "India",
   email: "ribhavjain4@gmail.com",
+  // Drop your PDF at public/Ribhav-Jain-CV.pdf to wire up the "Download CV" button.
+  resumeUrl: "/Ribhav-Jain-CV.pdf",
   socials: {
     github: "https://github.com/ribhav-jain",
     linkedin: "https://www.linkedin.com/in/ribhav-jain",
-    twitter: "https://twitter.com",
     hackerrank: "https://www.hackerrank.com/profile/ribhavjain1",
     kaggle: "https://www.kaggle.com/RibhavJain",
   },
 };
 
+export const METRICS: Metric[] = [
+  { value: "6+", label: "Years building" },
+  { value: "5", label: "Enterprise tenants live" },
+  { value: "30%", label: "Fewer security breaches" },
+  { value: "40%", label: "Faster onboarding" },
+];
+
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    title: "Data Science & AI",
+    title: "GenAI & Agents",
+    skills: [
+      "LangGraph",
+      "LangChain",
+      "MCP (server & client)",
+      "RAG",
+      "Function Calling",
+      "Structured Outputs",
+      "Guardrails",
+      "Human-in-the-Loop",
+      "LoRA / PEFT",
+    ],
+  },
+  {
+    title: "LLMs, RAG & Vector",
+    skills: [
+      "GPT",
+      "Claude",
+      "Llama",
+      "AWS Bedrock",
+      "OpenAI",
+      "Embeddings",
+      "Semantic Search",
+      "Qdrant",
+      "FAISS",
+      "pgvector",
+    ],
+  },
+  {
+    title: "LLMOps & Evaluation",
+    skills: [
+      "LangSmith",
+      "Tracing & Observability",
+      "Cost Optimization",
+      "Prompt / Model Versioning",
+      "LLM-as-a-Judge",
+      "Eval Harnesses",
+    ],
+  },
+  {
+    title: "Machine Learning",
     skills: [
       "TensorFlow",
-      "Keras",
-      "LLM",
-      "RAG",
-      "Scikit-Learn",
-      "NLP",
-      "Time Series Analysis",
-      "Pandas",
-      "NumPy",
-      "Power BI",
+      "LSTM Autoencoders",
+      "scikit-learn",
+      "HDBSCAN",
+      "Anomaly Detection",
+      "Computer Vision (U2Net)",
+    ],
+  },
+  {
+    title: "Full-Stack & Languages",
+    skills: [
       "Python",
-    ],
-  },
-  {
-    title: "Backend & IAM",
-    skills: [
-      "Django",
-      "Flask",
-      "Spring",
-      "Play Framework",
-      "OAuth2",
-      "SAML",
-      "Spring Batch",
-      "PostgreSQL",
-      "MongoDB",
-    ],
-  },
-  {
-    title: "Frontend Development",
-    skills: [
-      "Next.js",
+      "Java",
+      "JavaScript",
       "React",
+      "Next.js",
+      "FastAPI",
+      "Django (ASGI)",
+      "Spring Batch",
       "Ext JS",
-      "JavaScript (ES6+)",
-      "HTML5/CSS3",
-      "Responsive Dashboards",
-      "Tailwind CSS",
-      "NPM/Yarn",
+    ],
+  },
+  {
+    title: "Data, DevOps & Security",
+    skills: [
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+      "Kubernetes",
+      "AWS",
+      "SAML 2.0 / OIDC / OAuth 2.0",
+      "Zero-Trust",
+      "Multi-Tenancy",
     ],
   },
 ];
@@ -73,52 +118,69 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
 export const EXPERIENCES: Experience[] = [
   {
     id: "exp1",
-    role: "Software Engineer III",
+    role: "Lead AI Engineer",
     company: "Alert Enterprise",
-    period: "2024 - Present",
+    period: "Apr 2025 – Present",
     description:
-      "Spearheaded the development of an AI-powered agentic chatbot and Identity Intelligence system. Designed multi-tenant SSO architectures supporting SAML, OAuth, and OIDC. Reduced security breaches by 30% through insider threat detection models.",
-    technologies: ["AI Agents", "SAML/OIDC", "Spring", "Python", "RBAC"],
+      "Architected and lead delivery of a production agentic AI platform — orchestration service plus a MCP tool gateway.",
+    highlights: [
+      "Built a reusable MCP tool gateway and a resilient LangGraph multi-agent engine with a RAG advisor.",
+      "Designed a zero-trust, multi-tenant model with human-in-the-loop approval, and lead a team across AI and platform workstreams.",
+    ],
+    technologies: ["LangGraph", "MCP", "FastAPI", "AWS Bedrock"],
   },
   {
     id: "exp2",
-    role: "Software Engineer II",
+    role: "Software Engineer III",
     company: "Alert Enterprise",
-    period: "2023 - 2024",
-    description:
-      "Accelerated onboarding by 40% with a custom Entity Builder framework. Designed a drag-and-drop Layout Designer and developed Device Intelligence modules for anomaly detection and predictive maintenance.",
-    technologies: [
-      "Predictive Maintenance",
-      "Layout Designer",
-      "Anomaly Detection",
-      "Java",
+    period: "2024 – Mar 2025",
+    description: "Delivered GenAI and enterprise identity across the security suite.",
+    highlights: [
+      "Shipped Identity Intelligence — LSTM-autoencoder + HDBSCAN anomaly detection over physical-access events — cutting security breaches 30%.",
+      "Built multi-tenant SSO (SAML 2.0, OIDC, OAuth), turned the product into a SAML Identity Provider, and added a GenAI natural-language rule engine.",
     ],
+    technologies: ["TensorFlow", "SAML 2.0", "OIDC", "GenAI"],
   },
   {
     id: "exp3",
-    role: "Software Engineer I",
+    role: "Software Engineer II",
     company: "Alert Enterprise",
-    period: "2020 - 2023",
-    description:
-      "Implemented GenAI rule engines using MVEL/JS and large-scale ETL pipelines with Spring Batch. Delivered WCAG 2.0 AA accessibility compliance and AI-driven smart search functionality.",
-    technologies: ["Spring Batch", "GenAI", "ETL", "Accessibility", "MVEL"],
+    period: "2023 – 2024",
+    description: "Built ML-driven monitoring and no-code tooling adopted product-wide.",
+    highlights: [
+      "Created Device Intelligence (false-alarm reduction, predictive maintenance) and a no-code drag-and-drop analytics platform (D3, Plotly).",
+      "Shipped an Entity Builder and Layout Designer that cut customer onboarding time 40%.",
+    ],
+    technologies: ["React", "D3", "Anomaly Detection"],
   },
   {
     id: "exp4",
+    role: "Software Engineer I",
+    company: "Alert Enterprise",
+    period: "2020 – 2023",
+    description:
+      "Engineered high-volume data pipelines and access-provisioning foundations.",
+    highlights: [
+      "Built a fault-tolerant event-reconciliation pipeline (Spring Batch + Quartz) for high-volume PACS events, plus self-service access provisioning across Lenel, CCURE & AMAG.",
+    ],
+    technologies: ["Java", "Spring Batch", "PostgreSQL"],
+  },
+  {
+    id: "exp5",
     role: "Data Scientist Intern",
     company: "TCIL-IT",
     period: "2019",
     description:
-      "Developed a secure facial recognition login system integrating computer vision models with a React and Flask full-stack architecture.",
+      "Developed a secure facial-recognition login system integrating computer-vision models with a React and Flask full-stack architecture.",
     technologies: ["Computer Vision", "Flask", "React", "Python"],
   },
   {
-    id: "exp5",
+    id: "exp6",
     role: "Software Developer Intern",
     company: "Infowiz",
     period: "2018",
     description:
-      "Created an dashboard (charts & visualizations) for login activity and compliance.",
+      "Created a dashboard of charts and visualizations for login activity and compliance.",
     technologies: ["D3.js", "Dashboards", "JavaScript", "APIs"],
   },
 ];
@@ -129,13 +191,7 @@ export const PROJECTS: Project[] = [
     title: "Face Recognition Login",
     description:
       "A robust biometric authentication system eliminating passwords. Uses deep learning for facial embedding and liveness detection to ensure high-security access control.",
-    technologies: [
-      "OpenCV",
-      "Face Recognition",
-      "TensorFlow",
-      "Django",
-      "WebSockets",
-    ],
+    technologies: ["OpenCV", "Face Recognition", "TensorFlow", "Django", "WebSockets"],
     image: "/images/face-recognition.jpg",
     category: "Security",
   },
@@ -188,11 +244,11 @@ export const PROJECTS: Project[] = [
 
 export const EDUCATION: Education[] = [
   {
-    degree: "B.Tech — Computer Science & Engineering",
-    school: "Panjab University Chandigarh",
-    period: "2016 - 2020",
+    degree: "B.E. — Computer Science & Engineering",
+    school: "UIET, Panjab University, Chandigarh",
+    period: "2016 – 2020",
     details:
-      "Focused on core Computer Science fundamentals along with advanced AI and engineering disciplines, including Deep Learning, Data Science, and Full Stack Development.",
+      "Focused on core Computer Science fundamentals along with advanced AI and engineering disciplines, including Deep Learning, Data Science, and Full-Stack Development.",
     coursework: [
       "Data Structures & Algorithms",
       "Database Management Systems",
@@ -206,10 +262,10 @@ export const EDUCATION: Education[] = [
 ];
 
 export const CERTIFICATIONS: Certification[] = [
+  { name: "Hugging Face AI Agents", issuer: "Hugging Face" },
   { name: "Neural Networks & Deep Learning", issuer: "Andrew Ng" },
   { name: "Machine Learning", issuer: "Kirill Eremenko (Udemy)" },
   { name: "Data Science", issuer: "Jose Portilla" },
   { name: "Big Data Specialization", issuer: "Coursera" },
   { name: "Spring & Hibernate", issuer: "Chad Darby" },
-  { name: "Web Development", issuer: "Angela Yu" },
 ];

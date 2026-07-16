@@ -13,16 +13,16 @@ import { motion, useScroll, useSpring } from "framer-motion";
 function App() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
+    stiffness: 120,
     damping: 30,
     restDelta: 0.001,
   });
 
   return (
-    <div className="min-h-screen bg-primary text-slate-200 selection:bg-accent/30 selection:text-white font-sans relative">
-      {/* Global Scroll Progress Bar */}
+    <div className="relative min-h-screen bg-base text-ink font-sans antialiased">
+      {/* Scroll progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-highlight origin-left z-[60]"
+        className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-gradient-to-r from-accent to-highlight"
         style={{ scaleX }}
       />
 

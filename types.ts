@@ -17,6 +17,7 @@ export interface Experience {
   company: string;
   period: string;
   description: string;
+  highlights?: string[];
   technologies: string[];
 }
 
@@ -26,8 +27,8 @@ export interface Project {
   description: string;
   technologies: string[];
   link?: string;
-  image: string;
-  category: string; // Added for filtering
+  category: string; // used for filtering + generative cover art
+  image?: string; // optional; the UI uses generative covers by default
 }
 
 export interface Education {
@@ -41,6 +42,11 @@ export interface Education {
 export interface Certification {
   name: string;
   issuer: string;
+}
+
+export interface Metric {
+  value: string;
+  label: string;
 }
 
 export interface ChatMessage {

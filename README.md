@@ -1,26 +1,24 @@
-# portfolio-AI 🚀
+# Ribhav Jain — Portfolio AI 🚀
 
-A polished developer portfolio built with React, TypeScript and Vite — enhanced with an on-site AI assistant powered by Google's GenAI (Gemini).
+A polished developer portfolio built with **React 19 + TypeScript + Vite 7 + Tailwind CSS v4**, with an on-site AI assistant powered by **Anthropic's Claude**.
 
-## 🔎 What this project includes
+## 🔎 What's inside
 
-- A modern single-page portfolio built with React + TypeScript and Vite
-- Framer Motion animations and Tailwind-like utility classes for a smooth UI
-- An AI chat assistant (`AIChatModal`) that uses the Google GenAI client for context-aware responses about the portfolio owner
-- Sections: Hero, About, Skills, Experience, Education, Projects, Contact
+- Single-page portfolio: Hero, About, Skills, Experience, Education, Projects, Contact
+- Framer Motion animations, a runtime accent-color theme picker, and generative SVG art (no heavy image payloads)
+- An AI chat assistant (`AIChatModal`) that streams context-aware answers about the portfolio owner using the Claude API
 
 ## 🧰 Tech stack
 
-- React 19 • TypeScript
-- Vite (dev/build/preview scripts included)
-- @google/genai (Gemini) — used in `services/geminiService.ts`
-- Framer Motion, lucide-react for icons
+- React 19 · TypeScript
+- Vite 7 (dev/build/preview)
+- Tailwind CSS v4 (via `@tailwindcss/vite` — no CDN, fully bundled)
+- `@anthropic-ai/sdk` (Claude) — see `services/anthropicService.ts`
+- Framer Motion · lucide-react
 
 ## ⚡ Quick start
 
-Requirements:
-
-- Node.js 18+ and npm (or yarn)
+Requirements: Node.js 18+ and npm.
 
 1. Install dependencies
 
@@ -28,55 +26,52 @@ Requirements:
 npm install
 ```
 
-2. Provide the AI API Key (Gemini / Google GenAI)
+2. Provide the AI API key (optional — the site works without it; the assistant just shows a "not configured" message)
 
-This project uses a client-side demo client that reads an environment variable called `API_KEY` (see `services/geminiService.ts`).
+Create a `.env` file in the project root (see `.env.example`):
 
-Create a `.env` file in the project root and add your key (example):
-
-```powershell
-# .env
-API_KEY=YOUR_GOOGLE_GENAI_KEY
+```
+ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-IMPORTANT: Storing sensitive API keys in client-side bundles is insecure for production. Use a small backend or proxy (serverless function) to keep your API key secret and to enforce rate-limits and usage controls. See the "Security" notes below.
-
-3. Run locally
+3. Run
 
 ```powershell
-npm run dev
-# build for production
-npm run build
-# preview production build
-npm run preview
+npm run dev       # dev server at http://localhost:3000
+npm run build     # production build
+npm run preview   # preview the production build
+npm run typecheck # tsc --noEmit
 ```
 
-Open your browser at http://localhost:5173/ (Vite default) to view the portfolio.
+## 💬 AI assistant
 
-## 💬 AI assistant (how it works)
+- UI: `components/AIChatModal.tsx` (streams tokens as they arrive)
+- Client: `services/anthropicService.ts` — builds the system prompt from `constants.ts` and calls Claude (default model: **Claude Opus 4.8**; swap to `claude-haiku-4-5` in that file for a cheaper/faster FAQ bot)
 
-- The AI assistant is implemented in `components/AIChatModal.tsx` and calls the client in `services/geminiService.ts`.
+## 🔐 Security note (read before deploying)
 
-## 🔐 Security recommendation
+This build calls the Claude API **directly from the browser** (`dangerouslyAllowBrowser: true`), which means the API key is embedded in the shipped bundle. That's fine for a local demo but **insecure for a public deployment** — a client-side key can be extracted and abused.
 
-This repository intentionally demonstrates a client-side GenAI integration for a portfolio demo. However, client-side API keys can be easily extracted — do not ship real production API keys in a public client:
+For production, proxy the request through a small backend / serverless function that:
 
-## 📦 Project structure (key files)
+- holds `ANTHROPIC_API_KEY` server-side (never shipped to the client),
+- enforces rate limits and usage caps.
 
-- `App.tsx` — main app and layout
-- `components/AIChatModal.tsx` — AI chat UI and flow
-- `services/geminiService.ts` — GenAI client usage and instructions
-- `constants.ts` — profile, projects, and content used by the UI and the AI system prompt
+Then point `anthropicService.ts` at your proxy endpoint instead of instantiating the SDK in the browser.
 
-## 🛠 Development / Contributing
+## 🧩 Personalize
 
-Contributions are welcome — open an issue or PR. A simple workflow:
+- `constants.ts` — profile, skills, experience, projects, certifications, metrics (single source of truth for both the UI and the assistant's knowledge)
+- `PROFILE.resumeUrl` → drop your PDF at `public/Ribhav-Jain-CV.pdf` to wire up the "Download CV" button
+- Accent themes live in `components/ThemePicker.tsx`; base colors/fonts in `index.css` (`@theme`)
 
-1. Fork the repo
-2. Create a feature branch: `git checkout -b feat/my-change`
-3. Make changes and commit
-4. Push and open a pull request
+## 📦 Key files
+
+- `App.tsx` — layout
+- `index.css` — Tailwind v4 theme + design tokens
+- `components/` — section components + `AIChatModal`
+- `services/anthropicService.ts` — Claude integration
 
 ## 📄 License
 
-Licensed under the Apache 2.0 License — see the included `LICENSE` file.
+Apache 2.0 — see `LICENSE`.
