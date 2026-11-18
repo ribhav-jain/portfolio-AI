@@ -1,0 +1,66 @@
+.contact-grid {
+  display: grid;
+  gap: 48px;
+}
+@media (min-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+  }
+}
+.contact h2 {
+  margin-top: 14px;
+  font-size: clamp(2.75rem, 7.4vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 660;
+}
+.contact h2 em {
+  font-style: normal;
+  color: var(--fg4);
+}
+.mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 34px;
+  padding-bottom: 6px;
+  box-shadow: 0 1.5px 0 var(--track);
+  font-size: clamp(1.125rem, 2.6vw, 1.5rem);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  word-break: break-all;
+  transition:
+    color 0.2s,
+    box-shadow 0.2s;
+}
+.mail:hover {
+  color: var(--accent-text);
+  box-shadow: 0 1.5px 0 var(--accent);
+}
+.mail .i {
+  font-size: 1.15em;
+}
+.contact-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.contact-side .lead {
+  max-width: 28rem;
+  margin-bottom: 28px;
+}
+.contact-side .social {
+  margin-top: 0;
+}
+.contact-side .social::before {
+  display: none;
+}
+.contact-side .soc {
+  height: 46px;
+  padding: 0 20px 0 16px;
+  font-size: 0.9375rem;
+}
+section.contact {
+  padding-bottom: 0;
+}

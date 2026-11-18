@@ -1,0 +1,113 @@
+/* Design tokens. Light is the default; [data-theme="dark"] overrides it. */
+
+:root {
+  --bg: #ffffff;
+  --fg: #1d1d1f;
+  --fg2: #48484d;
+  --fg3: #6e6e73;
+  --fg4: #8e8e93;
+  --accent: #0071e3;
+  --accent-text: #0066cc;
+  --accent-soft: rgba(0, 113, 227, 0.1);
+  --hl: #12a5c9;
+  --grad: linear-gradient(95deg, #0071e3, #19a5e8 52%, #22b8a0);
+  --glass: rgba(255, 255, 255, 0.6);
+  --inner: rgba(255, 255, 255, 0.64);
+  --inner-hover: rgba(255, 255, 255, 0.92);
+  --hair: rgba(15, 23, 60, 0.08);
+  --edge: rgba(15, 23, 60, 0.09);
+  --edge-hover: rgba(0, 113, 227, 0.38);
+  --track: rgba(15, 23, 60, 0.11);
+  --solid: #ffffff;
+  --rim-grad: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0) 38%,
+    rgba(255, 255, 255, 0) 62%,
+    rgba(255, 255, 255, 0.6)
+  );
+  --float: 0 10px 28px -14px rgba(15, 23, 60, 0.22);
+  --float-lg: 0 24px 60px -24px rgba(15, 23, 60, 0.35);
+  --sheet: rgba(255, 255, 255, 0.88);
+  --orb1: #9bccff;
+  --orb2: #bcc4ff;
+  --orb3: #a5ecf0;
+  --orb4: #ffc7e2;
+  --orb-o: 0.42;
+  --ok: #1f9d55;
+  --wait: #c77700;
+  --stop: #d70015;
+  --code-bg: rgba(15, 23, 60, 0.045);
+  --cover: linear-gradient(
+    160deg,
+    rgba(0, 113, 227, 0.09),
+    rgba(34, 184, 160, 0.05) 70%,
+    rgba(255, 255, 255, 0)
+  );
+  --grid: rgba(15, 23, 60, 0.055);
+  --t1: #0071e3;
+  --t2: #1f9d55;
+  --t3: #5856d6;
+  --t4: #d6336c;
+  --t5: #0c8fa8;
+  --sans:
+    "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --mono:
+    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --spring: cubic-bezier(0.3, 1.35, 0.5, 1);
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --bg: #000000;
+  --fg: #f5f5f7;
+  --fg2: #c9c9ce;
+  --fg3: #a1a1a6;
+  --fg4: #7c7c82;
+  --accent: #0a84ff;
+  --accent-text: #4aa8ff;
+  --accent-soft: rgba(10, 132, 255, 0.18);
+  --hl: #5ac8fa;
+  --grad: linear-gradient(95deg, #3d9bff, #5ac8fa 52%, #63e6c8);
+  --glass: rgba(255, 255, 255, 0.05);
+  --inner: rgba(255, 255, 255, 0.045);
+  --inner-hover: rgba(255, 255, 255, 0.09);
+  --hair: rgba(255, 255, 255, 0.09);
+  --edge: rgba(255, 255, 255, 0.08);
+  --edge-hover: rgba(74, 168, 255, 0.5);
+  --track: rgba(255, 255, 255, 0.16);
+  --solid: #1c1c1e;
+  --rim-grad: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.34),
+    rgba(255, 255, 255, 0.04) 34%,
+    rgba(255, 255, 255, 0.02) 62%,
+    rgba(255, 255, 255, 0.18)
+  );
+  --float: 0 14px 34px -14px rgba(0, 0, 0, 0.8);
+  --float-lg: 0 30px 70px -24px rgba(0, 0, 0, 0.9);
+  --sheet: rgba(24, 24, 27, 0.88);
+  --orb1: #0d47c2;
+  --orb2: #1f3aa8;
+  --orb3: #0a6f7c;
+  --orb4: #6e2054;
+  --orb-o: 0.25;
+  --ok: #30d158;
+  --wait: #ffb340;
+  --stop: #ff6961;
+  --code-bg: rgba(255, 255, 255, 0.06);
+  --cover: linear-gradient(
+    160deg,
+    rgba(10, 132, 255, 0.11),
+    rgba(99, 230, 200, 0.04) 70%,
+    rgba(255, 255, 255, 0)
+  );
+  --grid: rgba(255, 255, 255, 0.05);
+  --t1: #4aa8ff;
+  --t2: #30d158;
+  --t3: #8e8cff;
+  --t4: #ff6b9d;
+  --t5: #5ac8fa;
+  color-scheme: dark;
+}

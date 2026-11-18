@@ -1,0 +1,258 @@
+/* Reset, page-level elements and motion. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 104px;
+}
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss03";
+  overflow-x: clip;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+pre {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+svg {
+  display: block;
+}
+[hidden] {
+  display: none !important;
+}
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+.i {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.i.solid {
+  fill: currentColor;
+  stroke: none;
+}
+.wrap {
+  width: min(1160px, 100% - 40px);
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .wrap {
+    width: min(1160px, 100% - 64px);
+  }
+}
+.skip {
+  position: fixed;
+  left: 16px;
+  top: -80px;
+  z-index: 200;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+}
+.skip:focus {
+  top: 16px;
+}
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  z-index: 70;
+  transform-origin: left;
+  transform: scaleX(var(--sp, 0));
+  background: var(--grad);
+}
+
+/* Backdrop */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg);
+  pointer-events: none;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(96px);
+  opacity: var(--orb-o);
+  will-change: transform;
+}
+.o1 {
+  width: 44vw;
+  height: 44vw;
+  min-width: 420px;
+  min-height: 420px;
+  left: -8vw;
+  top: -12vh;
+  background: var(--orb1);
+  animation: drift1 34s ease-in-out infinite alternate;
+}
+.o2 {
+  width: 38vw;
+  height: 38vw;
+  min-width: 380px;
+  min-height: 380px;
+  right: -6vw;
+  top: 6vh;
+  background: var(--orb2);
+  animation: drift2 40s ease-in-out infinite alternate;
+}
+.o3 {
+  width: 40vw;
+  height: 40vw;
+  min-width: 380px;
+  min-height: 380px;
+  left: 24vw;
+  bottom: -26vh;
+  background: var(--orb3);
+  animation: drift3 44s ease-in-out infinite alternate;
+}
+.o4 {
+  width: 26vw;
+  height: 26vw;
+  min-width: 280px;
+  min-height: 280px;
+  right: 8vw;
+  bottom: -8vh;
+  background: var(--orb4);
+  opacity: calc(var(--orb-o) * 0.7);
+  animation: drift1 38s ease-in-out infinite alternate-reverse;
+}
+@keyframes drift1 {
+  to {
+    transform: translate3d(8vw, 6vh, 0) scale(1.12);
+  }
+}
+@keyframes drift2 {
+  to {
+    transform: translate3d(-10vw, 10vh, 0) scale(0.92);
+  }
+}
+@keyframes drift3 {
+  to {
+    transform: translate3d(6vw, -10vh, 0) scale(1.1);
+  }
+}
+
+/* Motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Above the fold: plays once on load, staggered by --i. Needs no JavaScript. */
+  .enter {
+    animation: enter 0.9s var(--ease) calc(var(--i, 0) * 70ms) backwards;
+  }
+
+  /* Below the fold: useScrollReveal arms [data-r] elements, then reveals them as they scroll in. */
+  [data-r][data-reveal="armed"] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  [data-r][data-reveal="in"] {
+    transition:
+      opacity 0.9s var(--ease),
+      transform 0.9s var(--ease);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+}
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print: show all content and drop the fixed chrome and decoration. */
+@media print {
+  .skip,
+  .progress,
+  .backdrop,
+  .nav-wrap,
+  .mnav,
+  .ai-btn,
+  .chat {
+    display: none !important;
+  }
+  .enter {
+    animation: none !important;
+  }
+  [data-r][data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,14 @@
+.footer {
+  margin-top: clamp(56px, 8vw, 96px);
+  padding: 26px 0 96px;
+  box-shadow: 0 -1px 0 var(--hair);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 24px;
+  font-size: 0.8125rem;
+  color: var(--fg3);
+}
+.footer a:hover {
+  color: var(--fg);
+}

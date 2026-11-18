@@ -1,0 +1,151 @@
+.nav-wrap {
+  position: fixed;
+  inset: 14px 0 auto;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding-inline: 14px;
+  pointer-events: none;
+}
+.nav {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 56px;
+  padding: 6px;
+  border-radius: 999px;
+  max-width: 100%;
+  box-shadow:
+    0 0 0 1px var(--edge),
+    var(--float);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px 0 4px;
+  font-weight: 620;
+  font-size: 0.9375rem;
+  letter-spacing: -0.015em;
+}
+.mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-style: normal;
+}
+.seg {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.seg > a,
+.seg > button {
+  position: relative;
+  z-index: 1;
+  padding: 11px 15px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 520;
+  color: var(--fg2);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.seg > a:hover,
+.seg > a[aria-current],
+.seg > button:hover,
+.seg > button[aria-pressed="true"] {
+  color: var(--fg);
+}
+.lens {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 999px;
+  background: var(--inner-hover);
+  opacity: 0;
+  box-shadow: inset 0 0 0 1px var(--hair);
+  transition:
+    transform 0.45s var(--spring),
+    width 0.45s var(--spring),
+    opacity 0.25s;
+}
+.links {
+  display: none;
+}
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 18px;
+  color: var(--fg2);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.35s var(--spring);
+}
+.icon-btn:hover {
+  background: var(--inner-hover);
+  color: var(--fg);
+  transform: scale(1.06);
+}
+[data-theme="light"] .i-moon,
+[data-theme="dark"] .i-sun {
+  display: none;
+}
+.nav .btn {
+  height: 44px;
+}
+.mnav {
+  position: fixed;
+  z-index: 49;
+  inset: 80px 14px auto;
+  padding: 10px;
+  border-radius: 24px;
+  background: var(--sheet);
+  box-shadow:
+    0 0 0 1px var(--edge),
+    var(--float-lg);
+}
+.mnav a {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 1.0625rem;
+  font-weight: 560;
+}
+.mnav a:hover {
+  background: var(--inner-hover);
+}
+@media (max-width: 479px) {
+  .brand span {
+    display: none;
+  }
+  .brand {
+    padding-right: 4px;
+  }
+  .nav .btn {
+    padding: 0 16px;
+  }
+}
+@media (min-width: 940px) {
+  .links {
+    display: flex;
+  }
+  .menu-btn {
+    display: none;
+  }
+}

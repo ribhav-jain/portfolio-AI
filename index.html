@@ -1,40 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ribhav Jain — Lead AI Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio of Ribhav Jain — Lead AI Engineer and full-stack developer building agentic AI, scalable backends, and secure enterprise identity platforms."
+    />
+    <meta name="author" content="Ribhav Jain" />
+    <link rel="canonical" href="https://ribhavjain.vercel.app/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ribhav Jain — Lead AI Engineer</title>
-  <meta name="description"
-    content="Portfolio of Ribhav Jain — Lead AI Engineer & full-stack developer building agentic AI, scalable backends, and secure enterprise identity platforms." />
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ribhav Jain" />
+    <meta property="og:url" content="https://ribhavjain.vercel.app/" />
+    <meta property="og:title" content="Ribhav Jain — Lead AI Engineer" />
+    <meta
+      property="og:description"
+      content="Building the future of logic. Agentic AI, full-stack engineering, and secure enterprise identity."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Ribhav Jain — Lead AI Engineer" />
+    <meta
+      name="twitter:description"
+      content="Building the future of logic. Agentic AI, full-stack engineering, and secure enterprise identity."
+    />
 
-  <!-- Favicon (SVG data URI) -->
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23060713'/%3E%3Ctext x='50' y='71' font-family='monospace' font-weight='bold' font-size='58' fill='%236c63ff' text-anchor='middle'%3E%26gt;_%3C/text%3E%3C/svg%3E" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ribhav Jain",
+        "jobTitle": "Lead AI Engineer",
+        "url": "https://ribhavjain.vercel.app/",
+        "sameAs": [
+          "https://github.com/ribhav-jain",
+          "https://www.linkedin.com/in/ribhav-jain",
+          "https://www.kaggle.com/RibhavJain",
+          "https://www.hackerrank.com/profile/ribhavjain1"
+        ]
+      }
+    </script>
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ribhavjain.vercel.app/" />
-  <meta property="og:title" content="Ribhav Jain — Lead AI Engineer" />
-  <meta property="og:description"
-    content="Building the future of logic. Agentic AI, full-stack engineering, and secure enterprise identity." />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Ribhav Jain — Lead AI Engineer" />
-  <meta name="twitter:description"
-    content="Building the future of logic. Agentic AI, full-stack engineering, and secure enterprise identity." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet" />
-</head>
-
-<body class="bg-noise">
-  <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
-
+    <!-- Set the theme before first paint: the saved choice, otherwise the system setting.
+         The storage key is shared with src/lib/theme.ts. -->
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

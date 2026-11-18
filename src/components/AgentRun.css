@@ -1,0 +1,174 @@
+.run {
+  padding: 18px;
+}
+.run-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.run-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.run-title .chip {
+  font-size: 0.6875rem;
+  padding: 2px 8px;
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.75rem;
+  font-weight: 550;
+  color: var(--fg2);
+}
+.status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--wait);
+  transition: background 0.3s;
+}
+.run[data-state="running"] .status i {
+  background: var(--accent);
+}
+.run[data-state="approved"] .status i {
+  background: var(--ok);
+}
+.run[data-state="denied"] .status i {
+  background: var(--stop);
+}
+.flow {
+  position: relative;
+  display: grid;
+  gap: 13px;
+  --p: 0.8;
+}
+.flow::before,
+.flow::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 11px;
+  width: 2px;
+  border-radius: 2px;
+}
+.flow::before {
+  bottom: 12px;
+  background: var(--track);
+}
+.flow::after {
+  height: calc((100% - 24px) * var(--p));
+  background: var(--grad);
+  transition: height 0.7s var(--ease);
+}
+.node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 12px;
+  align-items: center;
+}
+.dot {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--solid);
+  color: transparent;
+  font-size: 12px;
+  box-shadow: inset 0 0 0 1.5px var(--track);
+  transition:
+    background 0.35s,
+    box-shadow 0.35s,
+    color 0.35s;
+}
+.dot .i {
+  stroke-width: 2.6;
+}
+.node b {
+  font-size: 0.84375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--fg3);
+  transition: color 0.35s;
+}
+.node small {
+  grid-column: 2;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  color: var(--fg3);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.node.on b {
+  color: var(--fg);
+}
+.node.on small {
+  opacity: 1;
+}
+.node.on .dot {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.node.wait .dot {
+  background: var(--wait);
+  color: #fff;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--wait) 22%, transparent);
+  animation: breathe 1.8s ease-in-out infinite;
+}
+.node.no .dot {
+  background: var(--stop);
+  color: #fff;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--stop) 18%, transparent);
+}
+.node .x,
+.node.no .ck,
+.node.wait .ck {
+  display: none;
+}
+.node.no .x {
+  display: block;
+}
+.node.wait .dot::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+@keyframes breathe {
+  50% {
+    box-shadow: 0 0 0 7px color-mix(in srgb, var(--wait) 10%, transparent);
+  }
+}
+.gate {
+  margin-top: 16px;
+  padding-top: 14px;
+  box-shadow: 0 -1px 0 var(--hair);
+}
+.gate p {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--fg2);
+}
+.gate p strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+.gate-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
